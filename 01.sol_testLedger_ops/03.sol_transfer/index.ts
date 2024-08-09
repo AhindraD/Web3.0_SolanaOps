@@ -37,8 +37,8 @@ export const transferSol = async (
 
 
 
-const Airdrop_AMOUNT = 5;
-const Transfer_AMOUNT = 3;
+const Airdrop_AMOUNT = 15;
+const Transfer_AMOUNT = 6;
 //airdrop--->check balance--->transfer--->check balance
 (async () => {
     // getKeypairFromFile() ----> defaulit path: ("~/.config/solana/id.json")
