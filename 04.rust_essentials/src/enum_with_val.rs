@@ -1,5 +1,3 @@
-pub mod enum_with_val;
-// pub use enum_with_val::*;
 use std::f32::consts::PI;
 
 enum Shape {
@@ -8,7 +6,7 @@ enum Shape {
     Rect(f32, f32),
 }
 
-fn main() {
+pub fn main() {
     let shape_cir = Shape::Circle(13.3);
     let shape_sq = Shape::Square(9.0);
     let shape_rect = Shape::Rect(3.0, 5.0);
