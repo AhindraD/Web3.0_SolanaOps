@@ -3,8 +3,8 @@ struct Rect<T> {
     width: T,
 }
 
-impl<T: std::ops::Mul<Output = T>> Rect<T> {
-    pub fn area(self) -> T {
+impl<T: std::ops::Mul<Output = T> + Copy> Rect<T> {
+    pub fn area(&self) -> T {
         self.height * self.width
     }
 }
