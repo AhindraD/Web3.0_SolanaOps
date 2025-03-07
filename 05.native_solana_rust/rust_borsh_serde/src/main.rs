@@ -1,24 +1,29 @@
-use serde::{Deserialize, Serialize};
-use serde_yaml::{from_str, to_string};
+use borsh::{BorshDeserialize, BorshSerialize};
 
-pub mod serialize_json;
-pub mod serialize_yaml;
-
-#[derive(Serialize, Deserialize, Debug)]
-pub struct UserAccount {
-    username: String,
-    profile: String,
+#[derive(BorshSerialize, BorshDeserialize, Debug, PartialEq)]
+pub struct AccountData {
+    id: u64,
+    content: String,
+    v0: Vec<u32>,
 }
 
 fn main() {
-    let user_acc1 = UserAccount {
-        username: String::from("knite"),
-        profile: String::from("x.com/knite"),
+    let original_data = AccountData {
+        id: 999u64,
+        content: String::from("x.com/knite"),
+        v0: vec![3, 5, 7, 9],
     };
 
-    let ser_yaml_str = to_string(&user_acc1).unwrap();
-    println!("{}", ser_yaml_str);
+    //SERIALIZE
+    let mut buffer: Vec<u8> = Vec::new();
+    // binary representation of original_data into buffer
+    original_data.serialize(&mut buffer).unwrap();
+    //NOW - buffer contains a compact, machine-readable format of MyStruct.
+    println!("serialized to buffer: {:?}", buffer);
 
-    let deser_user_struct: UserAccount = from_str(&ser_yaml_str).unwrap();
-    println!("{:?}", deser_user_struct);
+    //DE-SERIALIZE
+    let deserialized_data = AccountData::try_from_slice(&buffer).unwrap();
+    println!("Deserialized from buffer: {:?}", deserialized_data);
+
+    assert_eq!(original_data, deserialized_data);
 }
