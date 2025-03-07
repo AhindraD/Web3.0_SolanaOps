@@ -6,3 +6,6 @@ test-ledger
 .env.development
 .env.test
 .env.production
+**/node_modules/*
+**/target/* 
+**/-wallet.json
