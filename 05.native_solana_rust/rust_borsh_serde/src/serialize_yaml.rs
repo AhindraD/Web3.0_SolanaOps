@@ -1,8 +1,6 @@
 use serde::{Deserialize, Serialize};
 use serde_yaml::{from_str, to_string};
 
-pub mod serialize_json;
-pub mod serialize_yaml;
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct UserAccount {
@@ -10,7 +8,7 @@ pub struct UserAccount {
     profile: String,
 }
 
-fn main() {
+fn _main() {
     let user_acc1 = UserAccount {
         username: String::from("knite"),
         profile: String::from("x.com/knite"),

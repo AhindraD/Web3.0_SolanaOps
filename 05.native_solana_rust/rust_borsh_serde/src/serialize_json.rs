@@ -1,8 +1,5 @@
 use serde::{Deserialize, Serialize};
-use serde_yaml::{from_str, to_string};
-
-pub mod serialize_json;
-pub mod serialize_yaml;
+use serde_json::{from_str, to_string};
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct UserAccount {
@@ -10,15 +7,17 @@ pub struct UserAccount {
     profile: String,
 }
 
-fn main() {
+fn _main() {
     let user_acc1 = UserAccount {
         username: String::from("knite"),
         profile: String::from("x.com/knite"),
     };
 
-    let ser_yaml_str = to_string(&user_acc1).unwrap();
-    println!("{}", ser_yaml_str);
+    //Seraialize to JSON
+    let serialized_json_str = to_string(&user_acc1).unwrap();
+    println!("{:?}", serialized_json_str);
 
-    let deser_user_struct: UserAccount = from_str(&ser_yaml_str).unwrap();
+    //DE-Serialize to Struct
+    let deser_user_struct: UserAccount = from_str(&serialized_json_str).unwrap();
     println!("{:?}", deser_user_struct);
 }
